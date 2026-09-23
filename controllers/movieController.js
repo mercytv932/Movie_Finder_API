@@ -18,6 +18,21 @@ const searchMovies = async (req, res) => {
   }
 };
 
-const getMovieDetails = (req, res) => {};
+const getMovieDetails = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const response = await axios.get("http://www.omdbapi.com/", {
+      params: {
+        i: id,
+        apikey: process.env.OMDB_API_KEY,
+      },
+    });
+
+    return res.json(response.data);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to get the details" });
+  }
+};
 
 module.exports = { searchMovies, getMovieDetails };
