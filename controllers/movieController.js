@@ -14,6 +14,7 @@ const searchMovies = async (req, res) => {
 
     return res.json(response.data);
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json({ error: "Failed to search movies" });
   }
 };
